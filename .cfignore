@@ -1,0 +1,5 @@
+README.md
+.vscode/
+Services/bin/
+Services/restful-test/
+.DS_Store

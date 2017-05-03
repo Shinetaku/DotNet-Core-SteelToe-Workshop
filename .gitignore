@@ -1,0 +1,5 @@
+.vscode/
+Services/bin/
+Services/restful-test/
+Services/obj/
+.DS_Store

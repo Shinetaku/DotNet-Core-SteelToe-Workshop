@@ -1,0 +1,16 @@
+---
+applications:
+- name: fortune-teller-www
+  host: fortuneTeller
+  instances: 1
+  memory: 512M
+  disk_quota: 512M
+  buildpack: dotnet_core_buildpack
+  path: ./Www/
+- name: fortune-teller-services
+  host: fortuneTellerService
+  instances: 1
+  memory: 512M
+  disk_quota: 512M
+  buildpack: dotnet_core_buildpack
+  path: ./Services/
