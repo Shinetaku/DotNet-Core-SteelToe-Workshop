@@ -8,10 +8,14 @@ namespace FortuneTeller.Services
 {
     public class FortuneTellerContext : DbContext
     {
-        public FortuneTellerContext(DbContextOptions<FortuneTellerContext> options) : base(options)
-        {}
+        public FortuneTellerContext(DbContextOptions<FortuneTellerContext> options) : base(options){
+            
+        }
 
         public DbSet<Fortune> Fortunes { get; set; }
 
-    }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+        }
+    }   
 }

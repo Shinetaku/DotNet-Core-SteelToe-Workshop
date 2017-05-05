@@ -6,8 +6,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
+
+//For Logging
+using Microsoft.Extensions.Logging;
+
+//For MySql
+using MySQL.Data.EntityFrameworkCore.Extensions;
 
 namespace FortuneTeller.Services
 {
@@ -28,19 +34,42 @@ namespace FortuneTeller.Services
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddDbContext<FortuneTellerContext>(opt => opt.UseInMemoryDatabase());
+			//Using Internal Datastore
+			//services.AddDbContext<FortuneTellerContext>(opt => opt.UseInMemoryDatabase());
+			
+			//Using MySql Datastore
+			string connString = "";
+			
+			try{
+				dynamic vcap = JObject.Parse(Environment.GetEnvironmentVariable("VCAP_SERVICES"));
+				connString = String.Format("Server={0};port={1};Database={2};uid={3};pwd={4};",
+					vcap["p-mysql"][0].credentials.hostname,
+					vcap["p-mysql"][0].credentials.port,
+					vcap["p-mysql"][0].credentials.name,
+					vcap["p-mysql"][0].credentials.username,
+					vcap["p-mysql"][0].credentials.password);
+			}catch(Exception ex){
+				Console.Error.WriteLine("Error retrieving database connection string from environment variables");
+				Console.Error.WriteLine(ex);
+				Environment.Exit(1);
+			}
+
+			services.AddDbContext<FortuneTellerContext>(opt => opt.UseMySQL(connString));
+			
 			services.AddMvc();
 			services.AddScoped<IFortuneTeller, FortuneTeller>();
 			services.AddCors();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, FortuneTellerContext fortuneContext)
 		{
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 			loggerFactory.AddDebug();
 
 			app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+			
+			fortuneContext.Database.Migrate();
 
 			app.UseDefaultFiles();
 			app.UseStaticFiles();
