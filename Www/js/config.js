@@ -8,7 +8,6 @@ angular.module('mean').config(['$stateProvider','$urlRouterProvider','$resourceP
 	    }]);
     });
 
-
     $resourceProvider.stripTrailingSlashes = true;
     $resourceProvider.cancellable = true;//$cancelRequest()
     $resourceProvider.defaults.actions = {
@@ -30,6 +29,11 @@ angular.module('mean').config(['$stateProvider','$urlRouterProvider','$resourceP
 					url : '^/home',
 					controller : 'homeCtrl',
 					templateUrl: 'views/partials/home/home.html'
+			})
+			.state('partials.manage',{
+					url : '^/manage',
+					controller : 'manageCtrl',
+					templateUrl: 'views/partials/manage/manage.html'
 			})
 			;
 			/*.state('partials.404',{

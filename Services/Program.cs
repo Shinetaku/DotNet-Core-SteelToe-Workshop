@@ -18,7 +18,7 @@ namespace FortuneTeller.Services
 				.Build();
 
 			var host = new WebHostBuilder()
-				.UseSetting("applicationName", "fortune-teller")//the app name reference
+				.UseSetting("applicationName", "fortune-teller-services")//the app name reference
 				.CaptureStartupErrors(true)//display an error page, if errors happen durning startup
 				.UseContentRoot(Directory.GetCurrentDirectory())//folder where the application assembly resides
 				.UseSetting("detailedErrors", "true")//the app will display details of startup

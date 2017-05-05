@@ -1,10 +1,7 @@
 'use strict';
 
-angular.module('mean').controller('partialCtrl', ['message','$scope','codebase', function(message, $scope, codebase) {
+angular.module('mean').controller('partialCtrl', ['message','$scope',function(message, $scope) {
 	//Scope Functions
-	$scope.toggleCodebase = function(){
-		codebase.toggle();
-	};
 
 	//Local Functions
 	var init = function () {
@@ -18,7 +15,6 @@ angular.module('mean').controller('partialCtrl', ['message','$scope','codebase',
 	//Local  Variables
 
 	//Scope  Variables
-	$scope.codebase = codebase.current;
 
 	//Initialize Page
 	init();

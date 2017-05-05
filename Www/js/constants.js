@@ -1,6 +1,5 @@
 angular.module('mean')
-.constant('DotNetUrl', 'http://fortune-teller.apps.cloudyaws.io/')//localhost:5000
-.constant('JavaUrl', 'https://lambda.cloudyaws.io/')
+.constant('ApiUrl', 'https://fortuneTellerService.apps.cloudyaws.io/')
 .constant('USER_ROLES', {
 	guest: 1,
 	manager: 2,

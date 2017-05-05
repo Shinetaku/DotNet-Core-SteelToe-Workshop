@@ -1,11 +1,11 @@
 angular.module('mean').provider('fortune',[function () {
-	this.$get = ['$q', '$timeout','$resource','session','codebase',  function ($q, $timeout, $resource, session, codebase) {
+	this.$get = ['$q', '$timeout','$resource', 'ApiUrl', function ($q, $timeout, $resource, ApiUrl) {
 		var timeoutWait = 400;
 		var list = function (url) {
 			var deferred = $q.defer();
 
 			$timeout(function () {
-				$resource(url + 'fortunes').list(null,function(result){
+				$resource(ApiUrl + 'fortunes').list(null,function(result){
 																						deferred.resolve(result);
 																					}, function(err){
 																						deferred.reject(err);
@@ -14,11 +14,53 @@ angular.module('mean').provider('fortune',[function () {
 
 			return deferred.promise;
 		};
-		var getRandom = function (url) {
+		var getRandom = function () {
 			var deferred = $q.defer();
 
 			$timeout(function () {
-				$resource(url + 'random').get(null,function(result){
+				$resource(ApiUrl + 'random').get(null,function(result){
+																						deferred.resolve(result);
+																					}, function(err){
+																						deferred.reject(err);
+																					});
+			}, timeoutWait);
+
+			return deferred.promise;
+		};
+		var add = function (fortune) {
+			var deferred = $q.defer();
+
+			$timeout(function () {
+				var a = new $resource(ApiUrl);
+				a.post(fortune).$promise.then(function(result){
+																						deferred.resolve(result);
+																					}, function(err){
+																						deferred.reject(err);
+																					});
+				
+			}, timeoutWait);
+
+			return deferred.promise;
+		};
+
+		var remove = function (fortuneId) {
+			var deferred = $q.defer();
+
+			$timeout(function () {
+				$resource(ApiUrl +fortuneId).delete(null,function(result){
+																						deferred.resolve(result);
+																					}, function(err){
+																						deferred.reject(err);
+																					});
+			}, timeoutWait);
+
+			return deferred.promise;
+		};
+		var get = function (fortuneId) {
+			var deferred = $q.defer();
+
+			$timeout(function () {
+				$resource(ApiUrl + fortuneId).get(null,function(result){
 																						deferred.resolve(result);
 																					}, function(err){
 																						deferred.reject(err);
@@ -30,7 +72,10 @@ angular.module('mean').provider('fortune',[function () {
 
 		return {
 			list: list,
-			getRandom: getRandom
+			getRandom: getRandom,
+			add: add,
+			remove: remove,
+			get: get
 		}
 	}];
 

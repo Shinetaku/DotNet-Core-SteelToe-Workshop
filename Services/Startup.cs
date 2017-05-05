@@ -40,7 +40,7 @@ namespace FortuneTeller.Services
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 			loggerFactory.AddDebug();
 
-			app.UseCors(builder => builder.AllowAnyOrigin());//.AllowAnyHeader().AllowAnyMethod()
+			app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
 			app.UseDefaultFiles();
 			app.UseStaticFiles();

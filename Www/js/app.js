@@ -1,6 +1,6 @@
 'use strict';
 angular.module('mean', ['ngResource', 'ui.router', 'ui.bootstrap','oc.lazyLoad','ngDialog'])
-.run(['$rootScope','$window','$stateParams','DotNetUrl','JavaUrl','codebase', function($rootScope, $window, $stateParams, DotNetUrl, JavaUrl, codebase){
+.run(['$rootScope','$window','$stateParams',function($rootScope, $window, $stateParams){
 	$rootScope.storage = $window.storage;
 	$rootScope.stateParams = $stateParams;
 
@@ -12,12 +12,5 @@ angular.module('mean', ['ngResource', 'ui.router', 'ui.bootstrap','oc.lazyLoad',
 	$rootScope.$on('$destroy', function () {
 
 	});
-
-	$rootScope.getUrl = function(){
-		if(codebase.current.dotnet === true)
-			return DotNetUrl;
-
-		return JavaUrl;
-	};
 }])
 ;

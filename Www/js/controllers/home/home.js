@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean').controller('homeCtrl',['message','$scope','fortune','$rootScope','codebase', function(message, $scope, fortune, $rootScope, codebase){
+angular.module('mean').controller('homeCtrl',['message','$scope','fortune', function(message, $scope, fortune){
 	//Scope Functions
 	//$scope.XXX = function(){
 	//};
@@ -16,7 +16,7 @@ angular.module('mean').controller('homeCtrl',['message','$scope','fortune','$roo
 			message.addError($scope, err);
 		};
 
-		fortune.getRandom($rootScope.getUrl()).then(success, error);
+		fortune.getRandom().then(success, error);
 	};
 
 	//Destroy Scope

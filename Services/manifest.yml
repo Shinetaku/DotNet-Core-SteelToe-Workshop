@@ -1,0 +1,9 @@
+---
+applications:
+- name: fortune-teller-services
+  host: fortuneTellerService
+  instances: 1
+  memory: 256M
+  disk_quota: 512M
+  buildpack: dotnet_core_buildpack
+  path: ./
