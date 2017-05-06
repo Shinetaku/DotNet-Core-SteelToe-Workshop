@@ -15,6 +15,10 @@ using Microsoft.Extensions.Logging;
 //For MySql
 using MySQL.Data.EntityFrameworkCore.Extensions;
 
+//For SteelToe
+using Steeltoe.Extensions.Configuration;
+using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
+
 namespace FortuneTeller.Services
 {
 	public class Startup
@@ -25,6 +29,8 @@ namespace FortuneTeller.Services
 					.SetBasePath(env.ContentRootPath)
 					.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
 					.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+					//.AddConfigServer(env) //use the Spring Cloud Config Server for custom MySql config
+					.AddCloudFoundry() // Add `VCAP_` configuration info
 					.AddEnvironmentVariables();
 			Configuration = builder.Build();
 		}
@@ -38,8 +44,8 @@ namespace FortuneTeller.Services
 			//services.AddDbContext<FortuneTellerContext>(opt => opt.UseInMemoryDatabase());
 			
 			//Using MySql Datastore
+			/*
 			string connString = "";
-			
 			try{
 				dynamic vcap = JObject.Parse(Environment.GetEnvironmentVariable("VCAP_SERVICES"));
 				connString = String.Format("Server={0};port={1};Database={2};uid={3};pwd={4};",
@@ -53,9 +59,14 @@ namespace FortuneTeller.Services
 				Console.Error.WriteLine(ex);
 				Environment.Exit(1);
 			}
-
-			services.AddDbContext<FortuneTellerContext>(opt => opt.UseMySQL(connString));
 			
+			services.AddDbContext<FortuneTellerContext>(opt => opt.UseMySQL(connString));
+			*/
+			
+			//Using SteelToe for MySql
+			services.AddDbContext<FortuneTellerContext>(options => options.UseMySql(Configuration));
+			//services.AddDiscoveryClient(ServerConfig.Configuration);
+
 			services.AddMvc();
 			services.AddScoped<IFortuneTeller, FortuneTeller>();
 			services.AddCors();
@@ -71,7 +82,7 @@ namespace FortuneTeller.Services
 			
 			try{
 				fortuneContext.Database.Migrate();
-			}catch(Exception ex){
+			}catch(Exception){
 				fortuneContext.Database.ExecuteSqlCommand("CREATE TABLE `__EFMigrationsHistory` ( `MigrationId` nvarchar(150) NOT NULL, `ProductVersion` nvarchar(32) NOT NULL, PRIMARY KEY (`MigrationId`) );");
 				fortuneContext.Database.Migrate();
 			}

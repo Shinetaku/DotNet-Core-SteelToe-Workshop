@@ -7,3 +7,6 @@ applications:
   disk_quota: 512M
   buildpack: dotnet_core_buildpack
   path: ./bin/Debug/netcoreapp1.1/publish/
+  services:
+    #- eurekacf pogs
+    - ddieruf-mysql

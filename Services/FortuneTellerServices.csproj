@@ -27,6 +27,15 @@
 
     <!-- For Logging -->
     <PackageReference Include="log4net" Version="2.0.8" />
+
+    <!-- For SteelToe -->
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundry" Version= "1.0.0"/>
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.MySql" Version= "1.0.0"/>
+    <!-- 
+    Pivotal.Discovery.Client
+    Steeltoe.CloudFoundry.Connector
+    Steeltoe.Discovery.Client
+    Steeltoe.Discovery.Eureka.Client-->
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
