@@ -69,7 +69,12 @@ namespace FortuneTeller.Services
 
 			app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 			
-			fortuneContext.Database.Migrate();
+			try{
+				fortuneContext.Database.Migrate();
+			}catch(Exception ex){
+				fortuneContext.Database.ExecuteSqlCommand("CREATE TABLE `__EFMigrationsHistory` ( `MigrationId` nvarchar(150) NOT NULL, `ProductVersion` nvarchar(32) NOT NULL, PRIMARY KEY (`MigrationId`) );");
+				fortuneContext.Database.Migrate();
+			}
 
 			app.UseDefaultFiles();
 			app.UseStaticFiles();
