@@ -43,26 +43,6 @@ namespace FortuneTeller.Services
 			//Using Internal Datastore
 			//services.AddDbContext<FortuneTellerContext>(opt => opt.UseInMemoryDatabase());
 			
-			//Using MySql Datastore
-			/*
-			string connString = "";
-			try{
-				dynamic vcap = JObject.Parse(Environment.GetEnvironmentVariable("VCAP_SERVICES"));
-				connString = String.Format("Server={0};port={1};Database={2};uid={3};pwd={4};",
-					vcap["p-mysql"][0].credentials.hostname,
-					vcap["p-mysql"][0].credentials.port,
-					vcap["p-mysql"][0].credentials.name,
-					vcap["p-mysql"][0].credentials.username,
-					vcap["p-mysql"][0].credentials.password);
-			}catch(Exception ex){
-				Console.Error.WriteLine("Error retrieving database connection string from environment variables");
-				Console.Error.WriteLine(ex);
-				Environment.Exit(1);
-			}
-			
-			services.AddDbContext<FortuneTellerContext>(opt => opt.UseMySQL(connString));
-			*/
-			
 			//Using SteelToe for MySql
 			services.AddDbContext<FortuneTellerContext>(options => options.UseMySql(Configuration));
 			//services.AddDiscoveryClient(ServerConfig.Configuration);
