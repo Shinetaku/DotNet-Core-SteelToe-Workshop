@@ -9,4 +9,4 @@ applications:
   path: ./bin/Debug/netcoreapp1.1/publish/
   services:
     #- eurekacf pogs
-    - ddieruf-mysql
+    - mysql-100mb

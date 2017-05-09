@@ -1,53 +1,62 @@
 [vsCodeStartupCs]: img/vsCodeStartupCs.png " "
-[vsCodeFortuneControllerCs]: img/vsCodeFortuneControllerCs.png " "
-[vsCodeFortuneCs]: img/vsCodeFortuneCs.png " "
-[appManagerAppsPage]: img/appManagerAppsPage.png " "
-[fortuneTellerWebSite]: img/fortuneTellerWebSite.png " "
+appManagerMarketplace
+appManagerMySql
+vsCodeManifest
 
-# Lab 01 - Clone Source and Push App
+# Lab 02 - Using MySql as Data Store
 
-## Clone Source
+## Change App Data StoreTo MySql
 
-1. Download the app source code, by cloning Git Repo
+1. Within the Fortune Teller service app, go to the /Services/Startup.cs file and update the following:
 ```
-> mkdir DotNet-Core-SteelToe-Workshop
-> cd DotNet-Core-SteelToe-Workshop
-> git clone https://github.com/ddieruf/FortuneTeller.git
-> cd FortuneTeller
-```
-2. Open the source code directory in IDE (using VS Code as example)
-```
-> ~/DotNet-Core-SteelToe-Workshop/FortuneTeller
-```
+[Add the MySql dependency]
+> using MySQL.Data.EntityFrameworkCore.Extensions;
 
-## Review App Architecture
+[Comment out the InMemory data context]
+//services.AddDbContext<FortuneTellerContext>(opt => opt.UseInMemoryDatabase());
 
-1. Data storage - Notice in the app startup, a data context of "InMemory" is created. This will (initially) be used to store the Fortunes.
+
+[Add the ability to retrieve the VCAP_SERVICES environment variable. This variable will have connection string values.]
+//Using MySql Datastore
+string connString = "";
+
+try{
+	dynamic vcap = JObject.Parse(Environment.GetEnvironmentVariable("VCAP_SERVICES"));
+	connString = String.Format("Server={0};port={1};Database={2};uid={3};pwd={4};",
+		vcap["p-mysql"][0].credentials.hostname,
+		vcap["p-mysql"][0].credentials.port,
+		vcap["p-mysql"][0].credentials.name,
+		vcap["p-mysql"][0].credentials.username,
+		vcap["p-mysql"][0].credentials.password);
+}catch(Exception ex){
+	Console.Error.WriteLine("Error retrieving database connection string from environment variables");
+	Console.Error.WriteLine(ex);
+	Environment.Exit(1);
+}
+
+[Add the MySql data context]
+services.AddDbContext<FortuneTellerContext>(opt => opt.UseMySQL(connString));
+```
+2. The Startup.cs file should look like this:
 ![alt text][vsCodeStartupCs]
-2. Entity framework - The App is utilizing EntityFrameworkCore, with a single entity of Fortune.
-![alt text][vsCodeFortuneCs]
-3. Microservice endpoints - The app has 6 endpoints: GET /fortunes, GET /random, GET /{fortunId}, POST fortune, PUT /{fortunId}, DELETE /{fortunId}
-![alt text][vsCodeFortuneControllerCs]
 
-## Review Manifest
+## Bind MySql to App
+1. In AppManager, click the Marketplace link in left box.
+![alt text][appManagerMarketplace]
+2. Choose the MySql service, and a capacity plan. In this case the 100mb plan will be used.
+![alt text][appManagerMySql]
+3. Click the blue 'Select this plan' button, name the new instance as mysql-100mb, select the Development space, select the fortune-teller-services app, and click the blue 'Add' button.
+![alt text][appManagerMySqlValues]
 
-1. To push the app to PCF, a configuration must be provided. The App has a manifest.yml file with all needed values.
+## Update App Manifest
+1. Open the /manofest.yml file and add the following:
 ```
-[The app name to be used by PCF]
-name: fortune-teller-services
-
-[The url prefix to execute the microservice endpoints]
-host: fortuneTellerService
-
-[The number of instances]
-instances: 1
-
-[The amount of memory allocated to the app]
-memory: 256M
-
-[The amount of disk storage allocated to the app]
-disk_quota: 512M
+  services:
+    - mysql-100mb
 ```
+**Note the spacing, from the left margin there should be 2 spaces before "services" and 4 spaces before "- mysql-100mb"
+2. The manifest.yml file should look like this:
+![alt text][vsCodeManifest]
 
 ## Push The App
 1. Open a Terminal (or command prompt) and navigate to the app directory.
@@ -70,10 +79,4 @@ Space:          Development
 4. The cf cli will provide feedback about each step it takes to create the App Container and deploy.
 
 ## View The App
-1. Once successfully pushed, in AppManager click the 'Development' space in the left box.
-![alt text][appManagerAppsPage]
-2. Notice there are two apps running! Yeah!
-3. The column labeled 'Route' will offer a link to execute the app. Click the route for the 'fortune-teller-www' app.
-4. A new tab will be created, loading the FortuneTeller app web site.
-![alt text][fortuneTellerWebSite]
-5. Horray! The app is running!
+1. When you refresh the already opened Fortune Teller browser window, a new fortune should be shown. Yeah! You have changed the data store to MySql.
