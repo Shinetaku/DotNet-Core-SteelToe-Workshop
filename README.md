@@ -6,6 +6,7 @@ This workshop assumes the student has a basic understanding of PCF, with regard 
 - [Git Client](https://git-scm.com/downloads)
 - [VS Code](https://code.visualstudio.com/download) or [Visual Studio](https://www.visualstudio.com/downloads/)
 - [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+- [Chrome Browser](http://www.google.com/chrome)
 **Java IDE will not be needed
 
 ## Workshop Sessions
