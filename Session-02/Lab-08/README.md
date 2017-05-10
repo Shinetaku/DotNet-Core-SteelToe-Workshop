@@ -75,7 +75,6 @@ Space:          Development
 4. A new tab will be created, loading the FortuneTeller app web site.
 ![alt text][fortuneTellerWebSite]
 5. Horray! The app is running!
-```
 
 
 ___
