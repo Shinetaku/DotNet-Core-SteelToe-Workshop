@@ -43,4 +43,5 @@ Space:          Development
 
 9. Your a champ!
 
+#### <i class="icon-folder-open"></i> Switch to another
 |**[Home](../../README.md)**| |**[Next Lab-01](../Lab-01/README.md)**|
