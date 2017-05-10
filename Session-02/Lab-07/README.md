@@ -1,4 +1,4 @@
-[vsCodeFortuneTellerCs]: img/vsCodeFortuneTellerCs.png " "
+[vsCodeFortuneControllerCs.png]: img/vsCodeFortuneControllerCs.png.png " "
 [vsCodeAppSettingsCs]: img/vsCodeAppSettingsCs.png " "
 [vsCodeStartupCs]: img/vsCodeStartupCs.png " "
 [vsCodeManifestCs]: img/vsCodeManifestCs.png " "
@@ -8,7 +8,7 @@
 ## Update AppSettings With Eureka
 1. Within the Fortune Teller service app, go to the /Services/appsettings.json and update the following:
 [Just after the closing bracket for the "Logging" node, add the below json]
-[!!Remember to replace THE_URL_OF_EUREKA with the actual URL]
+[!!Remember to replace THE_URL_OF_EUREKA with the actual URL (AppManager>my space>Service tab>Service Registry>Manage>Server URL)]
 ```
 ,"spring": {
     "application": {
@@ -25,7 +25,7 @@
 2. Your file should look like this:
 
 ![alt text][vsCodeAppSettingsCs]
-## Add SteelToe Dependencies amd Spring Cloud Discovery
+## Add SteelToe Dependencies and Spring Cloud Discovery
 1. Within the Fortune Teller service app, go to the /Services/Startup.cs file and update the following:
 [Add the dependencies]
 ```
@@ -45,7 +45,7 @@ app.UseDiscoveryClient();
 ## Update Manifest With Spring Cloud Services
 1. Within the Fortune Teller service app, go to the manifest.yml file and update the following:
 [Add Spring Cloud services binding]
-[!!Remember to replace NAME_OF_YOUR_SPRING_CLOUD_SERVICE and NAME_OF_YOUR_SPRING_CLOUD_CONFIG_SERVICE with the actual service names]
+[!!Remember to replace NAME_OF_YOUR_SPRING_CLOUD_SERVICE with the actual service name]
 ```
   services:
     - mysql-100mb
@@ -60,13 +60,13 @@ We have now told the app where to find the Eureka discovery server, configured i
 Further reading and examples are available at: http://steeltoe.io/docs/steeltoe-discovery/
 
 ## Consume Discovered Service
-1. Within the Fortune Teller service app, go to the /Services/Controllers/FortuneCOntroller.cs file and update the following:
+1. Within the Fortune Teller service app, go to the /Services/Controllers/FortuneController.cs file and update the following:
 [Add the SteelToe and Json dependency]
 ```
 using Pivotal.Discovery.Client;
 using Newtonsoft.Json;
 ```
-[Within the FortuneController class, as a class wide variable, add the discovery handler]
+[Within the FortuneController class, as a class wide variable add the discovery handler]
 ```
 DiscoveryHttpClientHandler _handler;
 ```
@@ -88,16 +88,16 @@ public Fortune GetRandom(){
 
   var result = task.Result;
 
-  Fortune f = (Fortune)JsonConvert.DeserializeObject(result);
+  Fortune f = JsonConvert.DeserializeObject<Fortune>(result);
   return f;
 }
 ```
 2. Your file should look like this:
 
-![alt text][vsCodeFortuneTellerCs]
+![alt text][vsCodeFortuneControllerCs.png]
 
 ## About This
-The discovered service is asynchronous but our endpoint is synchronous, so we used a blocking task to complete the request. Notice the format of the Http request "https://fortunes/random". If you break this down, the "fortunes" piece
+The discovered service is asynchronous but our endpoint is synchronous, so we used a blocking task to complete the request. Notice the format of the Http request "https://fortunes/random". If you break this down, the "fortunes" piece matches the name of the app that was registered in the Service Registry broker (AppManager>my space>Services tab>Service Registry>Manage). The "random" piece matched the endpoint address within the registered service.
 
 ## Push The App
 1. Open a Terminal (or command prompt) and navigate to the app directory.
@@ -109,9 +109,9 @@ The discovered service is asynchronous but our endpoint is synchronous, so we us
 > cf target
 
 API endpoint:   <PROVIDED_BY_INSTRUCTOR>
-User:           USER123
-Org:            Student01
-Space:          Development
+User:           <STUDENT-X>
+Org:            Vantage
+Space:          <STUDENT-X>
 ```
 3. Push the app
 ```
@@ -120,7 +120,7 @@ Space:          Development
 4. The cf cli will provide feedback about each step it takes to create the App Container and deploy
 
 ## View The App
-1. In AppManager click the 'Development' space in the left box
+1. In AppManager click the <STUDENT-X> space in the left box
 2. The column labeled 'Route' will offer a link to execute the app. Click the route for the 'fortune-teller-www' app.
 3. A new tab will be created, loading the FortuneTeller app web site
 ![alt text][fortuneTellerWebSite]
