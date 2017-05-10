@@ -90,7 +90,7 @@ Space:          student-x
 4. The cf cli will provide feedback about each step it takes to create the App Container and deploy.
 
 ## View The App
-1. Once successfully pushed, in AppManager click the 'Development' space in the left box.
+1. Once successfully pushed, in AppManager click the 'student-x' space in the left box.
 ![alt text][appManagerAppsPage]
 2. Notice there are two apps running! Yeah!
 3. The column labeled 'Route' will offer a link to execute the app. Click the route for the 'fortune-teller-www' app.
