@@ -11,7 +11,7 @@ This workshop assumes the student has a basic understanding of Pivotal Cloud Fou
 
 ## Workshop Sessions
 
-#### Session 1: DotNet Core Deployment with High availability - [Start Session](Session-01/README.md)
+#### Session 1: DotNet Core Deployment with High availability - [Start Session](Session-01/AppMgr-Login/README.md)
   - AppManager Refresh - Review AppManager layout and confirm login credentials
   - Session Overview - Review session labs
   - Lab 1 - Clone Source and Push
@@ -19,14 +19,14 @@ This workshop assumes the student has a basic understanding of Pivotal Cloud Fou
   - Lab 3 - Auto Scaling the App Instances
   - Lab 4 - Zero Downtime Deployments
 
-#### Session 2: Spring Cloud Services and the SteelToe Framework - [Start Session](Session-02/README.md)
+#### Session 2: Spring Cloud Services and the SteelToe Framework - [Start Session](Session-02/Lab-05/README.md)
   - Session Overview - Review session labs
   - Lab 5 - Start SCS and Configure
   - Lab 6 - Service Discovery through Eureka
   - Lab 7 - Refactor DotNet Core for Service Discovery
   - Lab 8 - Rafactor DotNet Core with MySql Abstractions
 
-#### Session 3: Spring Cloud Data Flow (SCDF) with GenFire - [Start Session](Session-03/README.md)
+#### Session 3: Spring Cloud Data Flow (SCDF) with GenFire
   - Spring Cloud Data Flow and GemFire Overview
   - Binding to GemFire
   - Spring Cloud Data Flow and GemFire
