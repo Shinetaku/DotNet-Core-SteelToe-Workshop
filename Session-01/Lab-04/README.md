@@ -9,14 +9,6 @@
 
 # Lab 04 - Zero Downtime Deployment
 
-## Update App Manifest
-1. Open the /manifest.yml file and change the following:
-```
-name: fortune-teller-services-version2
-host: fortunetellerservice_version2
-```
-2. Save your changes.
-
 ## Push Version 2 App
 1. Open a Terminal (or command prompt) and navigate to the app directory
 ```
@@ -31,9 +23,9 @@ User:           USER123
 Org:            Student01
 Space:          Development
 ```
-3. Push the app
+3. Push the app, with a different name and URL prefix
 ```
-> cf push
+> cf push fortune-teller-services-version2 --hostname fortunetellerservice_version2
 ```
 4. The cf cli will provide feedback about each step it takes to create the App Container and deploy
 

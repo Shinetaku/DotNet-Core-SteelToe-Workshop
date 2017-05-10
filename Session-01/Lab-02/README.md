@@ -6,7 +6,6 @@
 # Lab 02 - Using MySql as Data Store
 
 ## Change App Data StoreTo MySql
-
 1. Within the Fortune Teller service app, go to the /Services/Startup.cs file and update the following:
 ```
 [Add the MySql dependency]
