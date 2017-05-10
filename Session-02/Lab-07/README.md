@@ -77,7 +77,7 @@ Space:          Development
 2. The column labeled 'Route' will offer a link to execute the app. Click the route for the 'fortune-teller-www' app.
 3. A new tab will be created, loading the FortuneTeller app web site
 ![alt text][fortuneTellerWebSite]
-4. The app is now using MySql as a service from SteelToe
+4. How easy was that?! The app is using the same MySql database but not more connection string.
 
 
 ___

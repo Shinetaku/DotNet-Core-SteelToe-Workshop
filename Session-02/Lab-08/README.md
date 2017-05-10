@@ -1,24 +1,33 @@
-[appmanager-service-registry]: img/appmanager-service-registry.png " "
+[vsCodeFortuneTellerCs]: img/vsCodeFortuneTellerCs.png " "
+[vsCodeAppSettingsCs]: img/vsCodeAppSettingsCs.png " "
+[vsCodeStartupCs]: img/vsCodeStartupCs.png " "
+[vsCodeManifestCs]: img/vsCodeManifestCs.png " "
 
 # Lab 08 - Refactor DotNet Core for Service Discovery
 
+## Update AppSettings With Eureka
+1. Within the Fortune Teller service app, go to the /Services/appsettings.json and update the following:
+[Just after the closing bracket for the "Logging" node, add the below json]
+```
+	,"spring": {
+    "application": {
+      "name": "fortuneTellerService"
+    }
+  },
+  "eureka": {
+    "client": {
+      "serviceUrl": "http://XXXXXXX:8761/eureka/",
+      "shouldRegisterWithEureka": false
+    }
+  }
+```
+2. Your file should look like this:
+![alt text][vsCodeAppSettingsCs]
 ## Add SteelToe Dependcies amd Spring Cloud Discovery
 1. Within the Fortune Teller service app, go to the /Services/Startup.cs file and update the following:
 [Add the dependencies]
 ```
-using Steeltoe.Extensions.Configuration;
-using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
 using Steeltoe.Discovery.Client;
-```
-[Edit the Startup method]
-```
-var builder = new ConfigurationBuilder()
-					.SetBasePath(env.ContentRootPath)
-					.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-					.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
--->			.AddConfigServer(env) //use the Spring Cloud Config Server for custom MySql config
-					//.AddCloudFoundry() // Add `VCAP_` configuration info
-					.AddEnvironmentVariables();
 ```
 [Add the following line to ConfigureServices method]
 ```
@@ -28,7 +37,8 @@ services.AddDiscoveryClient(Configuration);
 ```
 app.UseDiscoveryClient();
 ```
-
+2. Your file should look like this:
+![alt text][vsCodeStartupCs]
 ## Update Manifest With Spring Cloud Services
 1. Within the Fortune Teller service app, go to the manifest.yml file and update the following:
 [Add Spring Cloud services]
@@ -38,12 +48,77 @@ app.UseDiscoveryClient();
     - service-registry
     - config-serverc
 ```
+2. Your file should look like this:
+![alt text][vsCodeManifestCs]
+## About This
+We have now told the app where to find the Eureka discovery server, configured it to only discover services and not register services. Once the app has started, the Discovery client will begin to operate in the background; both registering services and periodically fetching the service registry from the server. The simplest way of using the registry to lookup services is to use the Steeltoe DiscoveryHttpClientHandler together with a System.Net.Http.HttpClient.
+
+Further reading and examples are available at: http://steeltoe.io/docs/steeltoe-discovery/
 
 ## Consume Discovered Service
-1. XXXX
+1. Within the Fortune Teller service app, go to the /Services/interface/FortuneTeller.cs file and update the following:
+[Add the SteelToe dependency]
+```
+using Pivotal.Discovery.Client;
+```
+[Within the FortuneTeller class, as a class wide variable, add the discovery handler]
+```
+DiscoveryHttpClientHandler _handler;
+private const string RANDOM_FORTUNE_URL = "https://fortuneService/api/fortunes/random";
+```
+[Refactor the FortuneTeller constructor method]
+```
+public FortuneTeller(FortuneTellerContext context, IDiscoveryClient client){
+	_context = context;
+	_handler = new DiscoveryHttpClientHandler(client);
+```
+[Refactor the GetRandom method to use discovered services]
+```
+public Fortune GetRandom(){
+	//return Random<Fortune>(_context.Fortunes);
 
-## View Changes
-1. XXXX
+	var client = new System.Net.Http.HttpClient(_handler, false);
+	//get the random fortune
+	var task = client.GetStringAsync(RANDOM_FORTUNE_URL);
+	task.Wait();
+
+	var result = task.Result;
+
+	return new Fortune{Id=0, Text=result};
+}
+```
+2. Your file should look like this:
+![alt text][vsCodeFortuneTellerCs]
+
+## About This
+Notice we did not change the controller, because the client facing endpoints need to stay the same. We are interested in replacing the data context lookup with the result of a discovered service request. The discovered service is asynchronous but our endpoint is synchronous, so we used a blocking task to complete the request.
+
+## Push The App
+1. Open a Terminal (or command prompt) and navigate to the app directory.
+```
+> cd ~/DotNet-Core-SteelToe-Workshop/FortuneTeller
+```
+2. Confirm the API target is set
+```
+> cf target
+
+API endpoint:   https://api.system.XXXXXX.XXX
+User:           USER123
+Org:            Student01
+Space:          Development
+```
+3. Push the app
+```
+> cf push
+```
+4. The cf cli will provide feedback about each step it takes to create the App Container and deploy
+
+## View The App
+1. In AppManager click the 'Development' space in the left box
+2. The column labeled 'Route' will offer a link to execute the app. Click the route for the 'fortune-teller-www' app.
+3. A new tab will be created, loading the FortuneTeller app web site
+![alt text][fortuneTellerWebSite]
+4. The site is now using SteelToe and Spring Cloud Services to get a random fontune from a Java microservice.
 
 
 ___
