@@ -16,7 +16,7 @@
 > cf login
 API endpoint: <PROVIDED_BY_INSTRUCTOR>
 
-Email> USER123
+Email> <STUDENT-X>
 
 Password>
 Authenticating...
@@ -27,9 +27,9 @@ OK
 6. Choose your assigned student-x space
 ```
 API endpoint:   <PROVIDED_BY_INSTRUCTOR>
-User:           USER123
+User:           <STUDENT-X>
 Org:            Vantage
-Space:          student-x
+Space:          <STUDENT-X>
 ```
 7. Great! You have confirmed proper access to PCF.
 

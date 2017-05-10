@@ -56,7 +56,7 @@ try{
 ![alt text][appManagerMarketplace]
 2. Choose the MySql service, and a capacity plan. In this case the 100mb plan will be used
 ![alt text][appManagerMySql]
-3. Click the blue 'Select this plan' button, name the new instance as mysql-100mb, select the Development space, select the fortune-teller-services app, and click the blue 'Add' button
+3. Click the blue 'Select this plan' button, name the new instance as mysql-100mb, select the <STUDENT-X> space, select the fortune-teller-services app, and click the blue 'Add' button
 ![alt text][appManagerMySqlValues]
 
 ## Update App Manifest
@@ -80,9 +80,9 @@ try{
 > cf target
 
 API endpoint:   <PROVIDED_BY_INSTRUCTOR>
-User:           USER123
-Org:            Student01
-Space:          Development
+User:           <STUDENT-X>
+Org:            Vantage
+Space:          <STUDENT-X>
 ```
 3. Push the app
 ```

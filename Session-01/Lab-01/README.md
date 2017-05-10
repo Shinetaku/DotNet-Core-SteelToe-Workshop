@@ -52,7 +52,7 @@ disk_quota: 512M
 ```
 
 ## Update App Manifest
-1. Within the same manifest.yml, replace BOTH <student-x> with your student information:
+1. Within the same manifest.yml, replace BOTH <STUDENT-X> with your student information:
 ```
 host: fortuneTeller_<STUDENT_X>
 ```
@@ -79,9 +79,9 @@ host: fortuneTellerService_<STUDENT_X>
 > cf target
 
 API endpoint:   <PROVIDED_BY_INSTRUCTOR>
-User:           USER123
+User:           <STUDENT-X>
 Org:            Vantage
-Space:          student-x
+Space:          <STUDENT-X>
 ```
 3. Push the app
 ```
