@@ -8,6 +8,7 @@
 ## Update AppSettings With Eureka
 1. Within the Fortune Teller service app, go to the /Services/appsettings.json and update the following:
 [Just after the closing bracket for the "Logging" node, add the below json]
+[!!Remember to replace THE_URL_OF_EUREKA with the actual URL]
 ```
 ,"spring": {
     "application": {
@@ -16,7 +17,7 @@
   },
   "eureka": {
     "client": {
-      "serviceUrl": "http://XXXXXXX:8761/eureka/",
+      "serviceUrl": "<THE_URL_OF_EUREKA>",
       "shouldRegisterWithEureka": false
     }
   }
@@ -43,12 +44,13 @@ app.UseDiscoveryClient();
 ![alt text][vsCodeStartupCs]
 ## Update Manifest With Spring Cloud Services
 1. Within the Fortune Teller service app, go to the manifest.yml file and update the following:
-[Add Spring Cloud services]
+[Add Spring Cloud services binding]
+[!!Remember to replace NAME_OF_YOUR_SPRING_CLOUD_SERVICE and NAME_OF_YOUR_SPRING_CLOUD_CONFIG_SERVICE with the actual service names]
 ```
   services:
     - mysql-100mb
-    - service-registry
-    - config-server
+    - <NAME_OF_YOUR_SPRING_CLOUD_SERVICE>
+    - <NAME_OF_YOUR_SPRING_CLOUD_CONFIG_SERVICE>
 ```
 2. Your file should look like this:
 
