@@ -20,16 +20,16 @@
 
 ## Review App Architecture
 
-1. Data storage - Notice in the app startup, a data context of "InMemory" is created. This will (initially) be used to store the Fortunes.
+1. Data storage - Notice in the services app /Services/Startup.cs, a data context of "InMemory" is created. This will (initially) be used to store the Fortunes.
 ![alt text][vsCodeStartupCs]
-2. Entity framework - The App is utilizing EntityFrameworkCore, with a single entity of Fortune.
+2. Entity framework - The services app is utilizing EntityFrameworkCore /Services/models/Fortune.cs, with a single entity of Fortune.
 ![alt text][vsCodeFortuneCs]
-3. Microservice endpoints - The app has 6 endpoints: GET /fortunes, GET /random, GET /{fortunId}, POST fortune, PUT /{fortunId}, DELETE /{fortunId}
+3. Microservice endpoints - The services app has 6 endpoints /Services/Controllers/FortuneController.cs: GET /fortunes, GET /random, GET /{fortuneId}, POST fortune, PUT /{fortuneId}, DELETE /{fortuneId}
 ![alt text][vsCodeFortuneControllerCs]
 
 ## Review Manifest
 
-1. To push the app to PCF, a configuration must be provided. The App has a manifest.yml file with all needed values.
+1. To push the app to PCF, a configuration must be provided. The services app has a /Services/manifest.yml file with all needed values.
 [The app name to be used by PCF]
 ```
 name: fortune-teller-services
@@ -51,6 +51,19 @@ memory: 256M
 disk_quota: 512M
 ```
 
+## Update App Manifest
+1. Within the same manifest.yml, replace <student-x> with your student information:
+```
+host: fortuneTellerService_<STUDENT-X>
+```
+2. Save the file
+
+## Update the UI Endpoint to Match
+1. Edit the file /Www/js/constants.js, change the ApiUrl constant value to match the host name:
+```
+.constant('ApiUrl', 'https://fortuneTellerService_<STUDENT-X>.apps.xxxxx.xxx/')
+```
+
 ## Push The App
 1. Open a Terminal (or command prompt) and navigate to the app directory.
 ```
@@ -62,8 +75,8 @@ disk_quota: 512M
 
 API endpoint:   <PROVIDED_BY_INSTRUCTOR>
 User:           USER123
-Org:            Student01
-Space:          Development
+Org:            Vantage
+Space:          student-x
 ```
 3. Push the app
 ```
