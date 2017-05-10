@@ -13,7 +13,7 @@
 1. Open the /manifest.yml file and change the following:
 ```
 name: fortune-teller-services-version2
-host: fortunetellerservice_version2
+host: fortunetellerservice_<STUDENT_X>_version2
 ```
 2. Save your changes
 
@@ -27,9 +27,9 @@ host: fortunetellerservice_version2
 > cf target
 
 API endpoint:   <PROVIDED_BY_INSTRUCTOR>
-User:           USER123
-Org:            Student01
-Space:          Development
+User:           <STUDENT-X>
+Org:            Vantage
+Space:          <STUDENT-X>
 ```
 3. Push the app
 ```
