@@ -52,10 +52,14 @@ disk_quota: 512M
 ```
 
 ## Update App Manifest
-1. Within the same manifest.yml, replace <student-x> with your student information:
+1. Within the same manifest.yml, replace BOTH <student-x> with your student information:
 ```
-host: fortuneTellerService_<STUDENT-X>
+host: fortuneTeller_<STUDENT_X>
 ```
+```
+host: fortuneTellerService_<STUDENT_X>
+```
+**Remember to change host value for each app. A requirement of PCF is, no 2 apps can have the same host name.
 2. Save the file
 
 ## Update the UI Endpoint to Match
@@ -63,6 +67,7 @@ host: fortuneTellerService_<STUDENT-X>
 ```
 .constant('ApiUrl', 'https://fortuneTellerService_<STUDENT-X>.apps.xxxxx.xxx/')
 ```
+2. Save the file
 
 ## Push The App
 1. Open a Terminal (or command prompt) and navigate to the app directory.
