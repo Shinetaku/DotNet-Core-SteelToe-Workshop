@@ -12,7 +12,7 @@
 ```
 > mkdir DotNet-Core-SteelToe-Workshop
 > cd DotNet-Core-SteelToe-Workshop
-> git clone https://github.com/ddieruf/FortuneTeller.git
+> git clone https://github.com/ddieruf/dotnet-core-fortuneteller.git
 > cd FortuneTeller
 ```
 2. Open the source code directory in IDE (using VS Code as example)

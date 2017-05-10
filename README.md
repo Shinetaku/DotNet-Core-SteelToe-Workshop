@@ -1,5 +1,5 @@
 # DotNet Core with SteelToe Workshop
-This workshop assumes the student has a basic understanding of PCF, with regard to pushing apps and the AppManager. The first day will start with a brief refresh of Org/Space/App in AppManager and confirm all attendees have correct desktops tools installed. A brief slide deck will be shown about the hands-on labs, with the majority of time for hands-on execution. All labs are focused on DotNet Core application development.
+This workshop assumes the student has a basic understanding of Pivotal Cloud Foundry, with regard to pushing apps and the AppManager. The first day will start with a brief refresh of Org/Space/App in AppManager and confirm all attendees have correct desktops tools installed. A brief slide deck will be shown about the hands-on labs, with the majority of time for hands-on execution. All labs are focused on DotNet Core application development.
 
 ## Prerequisites
 - [Cloud Foundry CLI](https://github.com/cloudfoundry/cli/releases)
@@ -25,3 +25,8 @@ This workshop assumes the student has a basic understanding of PCF, with regard 
   - Lab 6 - Service Discovery through Eureka
   - Lab 7 - Refactor DotNet Core for Service Discovery
   - Lab 8 - Rafactor DotNet Core with MySql Abstractions
+
+#### Session 3: Spring Cloud Data Flow (SCDF) with GenFire - [Start Session](Session-03/README.md)
+  - Spring Cloud Data Flow and GemFire Overview
+  - Binding to GemFire
+  - Spring Cloud Data Flow and GemFire
