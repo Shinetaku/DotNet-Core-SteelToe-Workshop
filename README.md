@@ -19,10 +19,9 @@ This workshop assumes the student has a basic understanding of Pivotal Cloud Fou
   - Lab 4 - Zero Downtime Deployments
 
 #### Session 2: Spring Cloud Services and the SteelToe Framework - [Start Session](Session-02/Lab-05/README.md)
-  - Lab 5 - Start SCS and Configure
+  - Lab 5 - Refactor DotNet Core with MySql Abstractions
   - Lab 6 - Service Discovery through Eureka
-  - Lab 7 - Refactor DotNet Core with MySql Abstractions
-  - Lab 8 - Refactor DotNet Core for Service Discovery
+  - Lab 7 - Refactor DotNet Core for Service Discovery
 
 #### Session 3: Spring Cloud Data Flow (SCDF) with GemFire
   - Spring Cloud Data Flow and GemFire Overview

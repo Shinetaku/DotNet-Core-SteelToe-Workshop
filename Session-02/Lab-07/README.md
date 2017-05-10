@@ -1,56 +1,103 @@
-[appmanager-service-registry]: img/appmanager-service-registry.png " "
+[vsCodeFortuneTellerCs]: img/vsCodeFortuneTellerCs.png " "
+[vsCodeAppSettingsCs]: img/vsCodeAppSettingsCs.png " "
 [vsCodeStartupCs]: img/vsCodeStartupCs.png " "
+[vsCodeManifestCs]: img/vsCodeManifestCs.png " "
 
-# Lab 07 - Refactor DotNet Core with MySql Abstractions
+# Lab 08 - Refactor DotNet Core for Service Discovery
 
-## Change MySql Connection
+## Update AppSettings With Eureka
+1. Within the Fortune Teller service app, go to the /Services/appsettings.json and update the following:
+[Just after the closing bracket for the "Logging" node, add the below json]
+[!!Remember to replace THE_URL_OF_EUREKA with the actual URL]
+```
+,"spring": {
+    "application": {
+      "name": "fortuneTellerService"
+    }
+  },
+  "eureka": {
+    "client": {
+      "serviceUrl": "<THE_URL_OF_EUREKA>",
+      "shouldRegisterWithEureka": false
+    }
+  }
+```
+2. Your file should look like this:
+
+![alt text][vsCodeAppSettingsCs]
+## Add SteelToe Dependencies amd Spring Cloud Discovery
 1. Within the Fortune Teller service app, go to the /Services/Startup.cs file and update the following:
-[Add dependencies]
+[Add the dependencies]
 ```
-using Steeltoe.Extensions.Configuration;
-using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
+using Steeltoe.Discovery.Client;
 ```
-[Update the builder configuration to include CloudFoundry service]
+[Add the following line to ConfigureServices method]
 ```
-var builder = new ConfigurationBuilder()
-				.SetBasePath(env.ContentRootPath)
-				.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-				.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
--->			.AddCloudFoundry()
-				.AddEnvironmentVariables();
+services.AddDiscoveryClient(Configuration);
 ```
-[Comment out the InMemory data context]
+[Add the following line to the Configure method]
 ```
-//services.AddDbContext<FortuneTellerContext>(opt => opt.UseInMemoryDatabase());
+app.UseDiscoveryClient();
 ```
-[Remove the below code]
-```
-//Using MySql Datastore
-string connString = "";
+2. Your file should look like this:
 
-try{
-	dynamic vcap = JObject.Parse(Environment.GetEnvironmentVariable("VCAP_SERVICES"));
-	connString = String.Format("Server={0};port={1};Database={2};uid={3};pwd={4};",
-		vcap["p-mysql"][0].credentials.hostname,
-		vcap["p-mysql"][0].credentials.port,
-		vcap["p-mysql"][0].credentials.name,
-		vcap["p-mysql"][0].credentials.username,
-		vcap["p-mysql"][0].credentials.password);
-}catch(Exception ex){
-	Console.Error.WriteLine("Error retrieving database connection string from environment variables");
-	Console.Error.WriteLine(ex);
-	Environment.Exit(1);
-}
-
-services.AddDbContext<FortuneTellerContext>(opt => opt.UseMySQL(connString));
-```
-[Add the new new MySql connection]
-```
-services.AddDbContext<FortuneTellerContext>(opt => opt.UseMySql(Configuration));
-```
-2. Save your changes
-3. The Startup.cs file should look like this:
 ![alt text][vsCodeStartupCs]
+## Update Manifest With Spring Cloud Services
+1. Within the Fortune Teller service app, go to the manifest.yml file and update the following:
+[Add Spring Cloud services binding]
+[!!Remember to replace NAME_OF_YOUR_SPRING_CLOUD_SERVICE and NAME_OF_YOUR_SPRING_CLOUD_CONFIG_SERVICE with the actual service names]
+```
+  services:
+    - mysql-100mb
+    - <NAME_OF_YOUR_SPRING_CLOUD_SERVICE>
+```
+2. Your file should look like this:
+
+![alt text][vsCodeManifestCs]
+## About This
+We have now told the app where to find the Eureka discovery server, configured it to only discover services and not register services. Once the app has started, the Discovery client will begin to operate in the background; both registering services and periodically fetching the service registry from the server. The simplest way of using the registry to lookup services is to use the Steeltoe DiscoveryHttpClientHandler together with a System.Net.Http.HttpClient.
+
+Further reading and examples are available at: http://steeltoe.io/docs/steeltoe-discovery/
+
+## Consume Discovered Service
+1. Within the Fortune Teller service app, go to the /Services/Controllers/FortuneCOntroller.cs file and update the following:
+[Add the SteelToe and Json dependency]
+```
+using Pivotal.Discovery.Client;
+using Newtonsoft.Json;
+```
+[Within the FortuneController class, as a class wide variable, add the discovery handler]
+```
+DiscoveryHttpClientHandler _handler;
+```
+[Refactor the FortuneController constructor method]
+```
+public FortuneController(IFortuneTeller iFortuneTeller, IDiscoveryClient client ){
+      _iFortuneTeller = iFortuneTeller ;
+      _handler = new DiscoveryHttpClientHandler(client);
+  }
+```
+[Refactor the GetRandom method to use discovered services]
+```
+public Fortune GetRandom(){
+	//return _iFortuneTeller.GetRandom();
+  var client = new System.Net.Http.HttpClient(_handler, false);
+  //get the random fortune
+  var task = client.GetStringAsync("https://fortunes/random");
+  task.Wait();
+
+  var result = task.Result;
+
+  Fortune f = (Fortune)JsonConvert.DeserializeObject(result);
+  return f;
+}
+```
+2. Your file should look like this:
+
+![alt text][vsCodeFortuneTellerCs]
+
+## About This
+The discovered service is asynchronous but our endpoint is synchronous, so we used a blocking task to complete the request. Notice the format of the Http request "https://fortunes/random". If you break this down, the "fortunes" piece
 
 ## Push The App
 1. Open a Terminal (or command prompt) and navigate to the app directory.
@@ -77,10 +124,10 @@ Space:          Development
 2. The column labeled 'Route' will offer a link to execute the app. Click the route for the 'fortune-teller-www' app.
 3. A new tab will be created, loading the FortuneTeller app web site
 ![alt text][fortuneTellerWebSite]
-4. How easy was that?! The app is using the same MySql database but not more connection string.
+4. The site is now using SteelToe and Spring Cloud Services to get a random fontune from a Java microservice.
 
 
 ___
 
 ___
-| **[Prev Lab](../Lab-06/README.md)** |_______________________________________________________________________________| **[Next Lab](../Lab-08/README.md)** |
+| **[Prev Lab](../Lab-06/README.md)** |_______________________________________________________________________________| **[Finished](../../README.md)** |
