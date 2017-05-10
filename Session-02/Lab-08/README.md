@@ -1,4 +1,5 @@
 [appmanager-service-registry]: img/appmanager-service-registry.png " "
+vsCodeStartupCs
 
 # Lab 08 - Refactor DotNet Core with MySql Abstractions
 
@@ -8,19 +9,22 @@
 [Add the following dependencies]
 using Steeltoe.Extensions.Configuration;
 using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
-
+```
 [Update the builder configuration to include CloudFoundry service]
-		var builder = new ConfigurationBuilder()
+```
+var builder = new ConfigurationBuilder()
 				.SetBasePath(env.ContentRootPath)
 				.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
 				.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
 -->			.AddCloudFoundry()
 				.AddEnvironmentVariables();
-
+```
 [Comment out the InMemory data context]
+```
 //services.AddDbContext<FortuneTellerContext>(opt => opt.UseInMemoryDatabase());
-
+```
 [Remove the below code]
+```
 //Using MySql Datastore
 string connString = "";
 
@@ -39,8 +43,9 @@ try{
 }
 
 services.AddDbContext<FortuneTellerContext>(opt => opt.UseMySQL(connString));
-
+```
 [Add the new new MySql connection]
+```
 services.AddDbContext<FortuneTellerContext>(opt => opt.UseMySql(Configuration));
 ```
 2. Save your changes
