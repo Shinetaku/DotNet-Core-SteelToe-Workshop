@@ -21,3 +21,9 @@ XX. The provided Java app (jar) has some special features. Most noteably each me
 @EnableDiscoveryClient
 public class FortuneTeller {
 ```
+
+
+___
+
+___
+| **[Prev Lab](../Lab-05/README.md)** |_______________________________________________________________________________| **[Next Lab](../Lab-07/README.md)** |
