@@ -9,16 +9,12 @@
 
 2. From a command prompt, set the API target for the CLI: (set appropriate end point for your environment)
 ```
-> cf api https://api.system.XXXXXX.XXX
+> cf api <PROVIDED_BY_INSTRUCTOR>
 ```
-3. Log In to Pivotal Cloud Foundry:
-```
-> cf login
-```
-4. Follow the prompts, entering the username (email) and password.
+3. Log In to Pivotal Cloud Foundry and follow the prompts, entering the username (or email) and password.
 ```
 > cf login
-API endpoint: https://api.system.XXXXXX.XXX
+API endpoint: https://api.system.xxxxxxx.xxx
 
 Email> USER123
 
@@ -35,11 +31,16 @@ User:           USER123
 Org:            Student01
 Space:          Development
 ```
+7. Great! You have confirmed proper access to PCF.
+
 ## AppsManager Log In
 
-7. Log In to Apps Manager URL: https://apps.system.XXXXXX.XXX. Use the same username and password you entered when using the CF CLI.
-
+7. Log In to Apps Manager URL: <PROVIDED_BY_INSTRUCTOR>. Use the same username and password you entered when logging into the CF CLI.
 ![alt text][login]
 
 8. Post Log In Screen:
 ![alt text][appManagerHome]
+
+9. Your a champ!
+
+| [Home](../../README.md)        |            | [Next Lab](../Lab-01/README.md)  |
