@@ -9,7 +9,7 @@
 1. Within the Fortune Teller service app, go to the /Services/appsettings.json and update the following:
 [Just after the closing bracket for the "Logging" node, add the below json]
 ```
-	,"spring": {
+,"spring": {
     "application": {
       "name": "fortuneTellerService"
     }
@@ -22,6 +22,7 @@
   }
 ```
 2. Your file should look like this:
+
 ![alt text][vsCodeAppSettingsCs]
 ## Add SteelToe Dependcies amd Spring Cloud Discovery
 1. Within the Fortune Teller service app, go to the /Services/Startup.cs file and update the following:
@@ -38,6 +39,7 @@ services.AddDiscoveryClient(Configuration);
 app.UseDiscoveryClient();
 ```
 2. Your file should look like this:
+
 ![alt text][vsCodeStartupCs]
 ## Update Manifest With Spring Cloud Services
 1. Within the Fortune Teller service app, go to the manifest.yml file and update the following:
@@ -46,9 +48,10 @@ app.UseDiscoveryClient();
   services:
     - mysql-100mb
     - service-registry
-    - config-serverc
+    - config-server
 ```
 2. Your file should look like this:
+
 ![alt text][vsCodeManifestCs]
 ## About This
 We have now told the app where to find the Eureka discovery server, configured it to only discover services and not register services. Once the app has started, the Discovery client will begin to operate in the background; both registering services and periodically fetching the service registry from the server. The simplest way of using the registry to lookup services is to use the Steeltoe DiscoveryHttpClientHandler together with a System.Net.Http.HttpClient.
@@ -88,6 +91,7 @@ public Fortune GetRandom(){
 }
 ```
 2. Your file should look like this:
+
 ![alt text][vsCodeFortuneTellerCs]
 
 ## About This
