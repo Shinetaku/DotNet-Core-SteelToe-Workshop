@@ -84,3 +84,9 @@ Space:          Development
 
 ## A Little Cleanup
 You can optionally remove the alternate routing for the version 2 app. Go to the 'Routes' page of the fortune-teller-services-version2 app and click the red 'X' next to the route having URL prefix 'fortunetellerservice_version2'.
+
+
+___
+
+___
+| **[Prev Lab](../Lab-04/README.md)** |__________________________________________________________________________________| **[Finished](../../README.md)** |

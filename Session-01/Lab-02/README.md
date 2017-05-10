@@ -81,3 +81,9 @@ Space:          Development
 
 ## View The App
 1. When you refresh the [already opened] Fortune Teller browser window, a new fortune should be shown. Yeah! You have changed the data store to MySql.
+
+
+___
+
+___
+| **[Prev Lab](../Lab-01/README.md)** |__________________________________________________________________________________| **[Next Lab](../Lab-03/README.md)** |

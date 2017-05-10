@@ -29,3 +29,9 @@
 1. Go back to the AppManager window and go to the fortune-teller-services app home page, by clicking the left 'Development' link and then the 'fortune-teller-services' link.
 ![alt text][appManagerFTServiceHome]
 2. Look at what we did! The current instance count is 3 (because that was our minimum), and if CPU utilization on any of the 3 instances goes above 80% another instance will be added automatically. Yeah!
+
+
+___
+
+___
+| **[Prev Lab](../Lab-02/README.md)** |__________________________________________________________________________________| **[Next Lab](../Lab-04/README.md)** |
