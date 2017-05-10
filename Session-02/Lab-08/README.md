@@ -25,7 +25,7 @@
 2. Your file should look like this:
 
 ![alt text][vsCodeAppSettingsCs]
-## Add SteelToe Dependcies amd Spring Cloud Discovery
+## Add SteelToe Dependencies amd Spring Cloud Discovery
 1. Within the Fortune Teller service app, go to the /Services/Startup.cs file and update the following:
 [Add the dependencies]
 ```
@@ -108,7 +108,7 @@ Notice we did not change the controller, because the client facing endpoints nee
 ```
 > cf target
 
-API endpoint:   https://api.system.XXXXXX.XXX
+API endpoint:   <PROVIDED_BY_INSTRUCTOR>
 User:           USER123
 Org:            Student01
 Space:          Development

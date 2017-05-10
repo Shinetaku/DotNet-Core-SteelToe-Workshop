@@ -9,6 +9,14 @@
 
 # Lab 04 - Zero Downtime Deployment
 
+## Update App Manifest
+1. Open the /manifest.yml file and change the following:
+```
+name: fortune-teller-services-version2
+host: fortunetellerservice_version2
+```
+2. Save your changes
+
 ## Push Version 2 App
 1. Open a Terminal (or command prompt) and navigate to the app directory
 ```
@@ -18,14 +26,14 @@
 ```
 > cf target
 
-API endpoint:   https://api.system.XXXXXX.XXX
+API endpoint:   <PROVIDED_BY_INSTRUCTOR>
 User:           USER123
 Org:            Student01
 Space:          Development
 ```
-3. Push the app, with a different name and URL prefix
+3. Push the app
 ```
-> cf push fortune-teller-services-version2 --hostname fortunetellerservice_version2
+> cf push
 ```
 4. The cf cli will provide feedback about each step it takes to create the App Container and deploy
 
@@ -51,7 +59,7 @@ Currently we have 2 apps running for Fortune Teller Services, the original app w
 We now have the route with URL prefix 'fortunetellerservice' going to 2 different apps. The amount of traffic going to each app is proportionate to the number of instances for each app. The original app fortune-teller-services has 3 instances, while the fortune-teller-services-version2 has only 1 instance. Therefore ~70% of the traffic will continue to go to the original app and ~30% will go to the version 2 app.
 
 ## Associate the Version 2 with Autoscaling
-1. Remembering your new skills for autoscaling an app go to the Development space home page, choose Services, and Bind the Autoscaling service to the fortune-teller-services-version2 app.
+1. Remembering your new skills for autoscaling an app; go to the Development space home page, choose Services, and bind the Autoscaling service to the fortune-teller-services-version2 app.
 2. Click the 'manage' link for the Autoscaler service and set a minimum of 3 maximum of 5 instances, and enable the service.
 
 ## About This
@@ -66,7 +74,7 @@ Both the old fortune-teller-services and new fortune-teller-services-version2 sh
 ```
 > cf target
 
-API endpoint:   https://api.system.XXXXXX.XXX
+API endpoint:   <PROVIDED_BY_INSTRUCTOR>
 User:           USER123
 Org:            Student01
 Space:          Development

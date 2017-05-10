@@ -12,13 +12,11 @@
 ```
 > mkdir DotNet-Core-SteelToe-Workshop
 > cd DotNet-Core-SteelToe-Workshop
-> git clone https://github.com/ddieruf/dotnet-core-fortuneteller.git
-> cd FortuneTeller
+> git clone <PROVIDED_BY_INSTRUCTOR>
+> cd dotnet-core-fortuneteller
 ```
-2. Open the source code directory in IDE (using VS Code as example)
-```
-> ~/DotNet-Core-SteelToe-Workshop/FortuneTeller
-```
+2. Open the source code directory /DotNet-Core-SteelToe-Workshop/FortuneTeller in your perferred IDE (all examples will use VS Code)
+
 
 ## Review App Architecture
 
@@ -62,7 +60,7 @@ disk_quota: 512M
 ```
 > cf target
 
-API endpoint:   https://api.system.XXXXXX.XXX
+API endpoint:   <PROVIDED_BY_INSTRUCTOR>
 User:           USER123
 Org:            Student01
 Space:          Development

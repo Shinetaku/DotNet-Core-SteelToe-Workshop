@@ -70,7 +70,7 @@ services.AddDbContext<FortuneTellerContext>(opt => opt.UseMySQL(connString));
 ```
 > cf target
 
-API endpoint:   https://api.system.XXXXXX.XXX
+API endpoint:   <PROVIDED_BY_INSTRUCTOR>
 User:           USER123
 Org:            Student01
 Space:          Development

@@ -24,7 +24,7 @@ This workshop assumes the student has a basic understanding of Pivotal Cloud Fou
   - Lab 7 - Refactor DotNet Core with MySql Abstractions
   - Lab 8 - Refactor DotNet Core for Service Discovery
 
-#### Session 3: Spring Cloud Data Flow (SCDF) with GenFire
+#### Session 3: Spring Cloud Data Flow (SCDF) with GemFire
   - Spring Cloud Data Flow and GemFire Overview
   - Binding to GemFire
   - Spring Cloud Data Flow and GemFire

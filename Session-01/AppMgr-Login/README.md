@@ -14,7 +14,7 @@
 3. Log In to Pivotal Cloud Foundry and follow the prompts, entering the username (or email) and password.
 ```
 > cf login
-API endpoint: https://api.system.xxxxxxx.xxx
+API endpoint: <PROVIDED_BY_INSTRUCTOR>
 
 Email> USER123
 
@@ -22,23 +22,25 @@ Password>
 Authenticating...
 OK
 ```
-5. Choose your assigned student Org
+5. Choose the Vantage org
 
-6. Choose the "Development" space
+6. Choose your assigned student-x space
 ```
-API endpoint:   https://api.system.XXXXXX.XXX
+API endpoint:   <PROVIDED_BY_INSTRUCTOR>
 User:           USER123
-Org:            Student01
-Space:          Development
+Org:            Vantage
+Space:          student-x
 ```
 7. Great! You have confirmed proper access to PCF.
 
 ## AppsManager Log In
 
 7. Log In to Apps Manager URL: <PROVIDED_BY_INSTRUCTOR>. Use the same username and password you entered when logging into the CF CLI.
+
 ![alt text][login]
 
 8. Post Log In Screen:
+
 ![alt text][appManagerHome]
 
 9. Your a champ!
