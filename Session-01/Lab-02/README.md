@@ -7,15 +7,16 @@
 
 ## Change App Data StoreTo MySql
 1. Within the Fortune Teller service app, go to the /Services/Startup.cs file and update the following:
-```
 [Add the MySql dependency]
-> using MySQL.Data.EntityFrameworkCore.Extensions;
-
+```
+using MySQL.Data.EntityFrameworkCore.Extensions;
+```
 [Comment out the InMemory data context]
+```
 //services.AddDbContext<FortuneTellerContext>(opt => opt.UseInMemoryDatabase());
-
-
+```
 [Add the ability to retrieve the VCAP_SERVICES environment variable. This variable will have connection string values.]
+```
 //Using MySql Datastore
 string connString = "";
 
@@ -32,8 +33,9 @@ try{
 	Console.Error.WriteLine(ex);
 	Environment.Exit(1);
 }
-
+```
 [Add the MySql data context]
+```
 services.AddDbContext<FortuneTellerContext>(opt => opt.UseMySQL(connString));
 ```
 2. Save your changes

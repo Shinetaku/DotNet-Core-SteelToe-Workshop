@@ -5,8 +5,8 @@ vsCodeStartupCs
 
 ## Change MySql Connection
 1. Within the Fortune Teller service app, go to the /Services/Startup.cs file and update the following:
+[Add dependencies]
 ```
-[Add the following dependencies]
 using Steeltoe.Extensions.Configuration;
 using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
 ```

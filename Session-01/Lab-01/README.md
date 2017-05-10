@@ -32,20 +32,24 @@
 ## Review Manifest
 
 1. To push the app to PCF, a configuration must be provided. The App has a manifest.yml file with all needed values.
-```
 [The app name to be used by PCF]
+```
 name: fortune-teller-services
-
+```
 [The url prefix to execute the microservice endpoints]
+```
 host: fortuneTellerService
-
+```
 [The number of instances]
+```
 instances: 1
-
+```
 [The amount of memory allocated to the app]
+```
 memory: 256M
-
+```
 [The amount of disk storage allocated to the app]
+```
 disk_quota: 512M
 ```
 
