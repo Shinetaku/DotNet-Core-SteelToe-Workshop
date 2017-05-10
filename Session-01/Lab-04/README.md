@@ -89,4 +89,4 @@ You can optionally remove the alternate routing for the version 2 app. Go to the
 ___
 
 ___
-| **[Prev Lab](../Lab-04/README.md)** |__________________________________________________________________________________| **[Finished](../../README.md)** |
+| **[Prev Lab](../Lab-04/README.md)** |_______________________________________________________________________________| **[Finished](../../README.md)** |
