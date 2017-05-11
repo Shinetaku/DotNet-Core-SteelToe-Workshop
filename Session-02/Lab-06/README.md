@@ -51,7 +51,6 @@ cf push -f manifest-pcf.yml
 Use the 'cf apps' command and/or login to Apps Manager to get the URL for the fortune-ui. Open the URL in a browser and verify you are gettig random fortunes.
 
 ## You now have a Java service you can discover from your applications using service-discovery
-```
 
 
 ___

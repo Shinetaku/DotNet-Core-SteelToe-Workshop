@@ -14,19 +14,19 @@
 3. Log In to Pivotal Cloud Foundry and follow the prompts, entering the username (or email) and password.
 ```
 > cf login
-API endpoint: <PROVIDED_BY_INSTRUCTOR>
+API endpoint: <CF_API_PROVIDED_BY_INSTRUCTOR>
 
 Email> <STUDENT-X>
 
 Password>
 Authenticating...
 OK
-```
-5. Choose the Vantage org
 
-6. Choose your assigned student-x space
-```
-API endpoint:   <PROVIDED_BY_INSTRUCTOR>
+Targeted org Vantage
+
+Targeted space <STUDENT-X>
+
+API endpoint:   <CF_API_PROVIDED_BY_INSTRUCTOR>
 User:           <STUDENT-X>
 Org:            Vantage
 Space:          <STUDENT-X>
@@ -35,7 +35,7 @@ Space:          <STUDENT-X>
 
 ## AppsManager Log In
 
-7. Log In to Apps Manager URL: <PROVIDED_BY_INSTRUCTOR>. Use the same username and password you entered when logging into the CF CLI.
+7. Log In to Apps Manager URL: <APPMANAGER_PROVIDED_BY_INSTRUCTOR>. Use the same username and password you entered when logging into the CF CLI.
 
 ![alt text][login]
 

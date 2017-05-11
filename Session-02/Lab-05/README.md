@@ -19,10 +19,6 @@ var builder = new ConfigurationBuilder()
 -->			.AddCloudFoundry()
 				.AddEnvironmentVariables();
 ```
-[Comment out the InMemory data context]
-```
-//services.AddDbContext<FortuneTellerContext>(opt => opt.UseInMemoryDatabase());
-```
 [Remove the below code]
 ```
 //Using MySql Datastore
@@ -50,6 +46,7 @@ services.AddDbContext<FortuneTellerContext>(opt => opt.UseMySql(Configuration));
 ```
 2. Save your changes
 3. The Startup.cs file should look like this:
+
 ![alt text][vsCodeStartupCs]
 
 ## Push The App
@@ -62,9 +59,9 @@ services.AddDbContext<FortuneTellerContext>(opt => opt.UseMySql(Configuration));
 > cf target
 
 API endpoint:   <PROVIDED_BY_INSTRUCTOR>
-User:           USER123
-Org:            Student01
-Space:          Development
+User:           <student-x>
+Org:            Vantage
+Space:          <student-x>
 ```
 3. Push the app
 ```
@@ -73,10 +70,12 @@ Space:          Development
 4. The cf cli will provide feedback about each step it takes to create the App Container and deploy
 
 ## View The App
-1. In AppManager click the 'Development' space in the left box
+1. In AppManager click the '<student-x>' space in the left box
 2. The column labeled 'Route' will offer a link to execute the app. Click the route for the 'fortune-teller-www' app.
 3. A new tab will be created, loading the FortuneTeller app web site
+
 ![alt text][fortuneTellerWebSite]
+
 4. How easy was that?! The app is using the same MySql database but not more connection string.
 
 
