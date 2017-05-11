@@ -1,4 +1,4 @@
-[vsCodeFortuneControllerCs.png]: img/vsCodeFortuneControllerCs.png.png " "
+[vsCodeFortuneControllerCs]: img/vsCodeFortuneControllerCs.png " "
 [vsCodeAppSettingsCs]: img/vsCodeAppSettingsCs.png " "
 [vsCodeStartupCs]: img/vsCodeStartupCs.png " "
 [vsCodeManifestCs]: img/vsCodeManifestCs.png " "
@@ -29,7 +29,7 @@
 1. Within the Fortune Teller service app, go to the /Services/Startup.cs file and update the following:
 [Add the dependencies]
 ```
-using Steeltoe.Discovery.Client;
+using Pivotal.Discovery.Client;
 ```
 [Add the following line to ConfigureServices method]
 ```
@@ -94,7 +94,7 @@ public Fortune GetRandom(){
 ```
 2. Your file should look like this:
 
-![alt text][vsCodeFortuneControllerCs.png]
+![alt text][vsCodeFortuneControllerCs]
 
 ## About This
 The discovered service is asynchronous but our endpoint is synchronous, so we used a blocking task to complete the request. Notice the format of the Http request "https://fortunes/random". If you break this down, the "fortunes" piece matches the name of the app that was registered in the Service Registry broker (AppManager>my space>Services tab>Service Registry>Manage). The "random" piece matched the endpoint address within the registered service.
