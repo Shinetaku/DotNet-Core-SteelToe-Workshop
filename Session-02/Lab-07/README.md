@@ -19,7 +19,8 @@
   "eureka": {
     "client": {
       "serviceUrl": "<THE_URL_OF_EUREKA>",
-      "shouldRegisterWithEureka": false
+      "shouldRegisterWithEureka": false,
+      "validate_certificates": false
     }
   }
 ```
