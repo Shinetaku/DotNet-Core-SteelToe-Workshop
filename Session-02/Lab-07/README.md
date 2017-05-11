@@ -2,6 +2,7 @@
 [vsCodeAppSettingsCs]: img/vsCodeAppSettingsCs.png " "
 [vsCodeStartupCs]: img/vsCodeStartupCs.png " "
 [vsCodeManifestCs]: img/vsCodeManifestCs.png " "
+[spaceGhost]: img/spaceghost_0.jpg ""
 
 # Lab 07 - Refactor DotNet Core for Service Discovery
 
@@ -123,8 +124,11 @@ Space:          <STUDENT-X>
 1. In AppManager click the <STUDENT-X> space in the left box
 2. The column labeled 'Route' will offer a link to execute the app. Click the route for the 'fortune-teller-www' app.
 3. A new tab will be created, loading the FortuneTeller app web site
-![alt text][fortuneTellerWebSite]
 4. The site is now using SteelToe and Spring Cloud Services to get a random fontune from a Java microservice.
+
+
+![alt text][spaceGhost]
+
 
 
 ___
