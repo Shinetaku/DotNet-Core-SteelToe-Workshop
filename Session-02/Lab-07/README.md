@@ -3,7 +3,7 @@
 [vsCodeStartupCs]: img/vsCodeStartupCs.png " "
 [vsCodeManifestCs]: img/vsCodeManifestCs.png " "
 
-# Lab 08 - Refactor DotNet Core for Service Discovery
+# Lab 07 - Refactor DotNet Core for Service Discovery
 
 ## Update AppSettings With Eureka
 1. Within the Fortune Teller service app, go to the /Services/appsettings.json and update the following:
