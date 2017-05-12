@@ -27,3 +27,4 @@ This workshop assumes the student has a basic understanding of Pivotal Cloud Fou
   - Spring Cloud Data Flow and GemFire Overview
   - Binding to GemFire
   - Spring Cloud Data Flow and GemFire
+
