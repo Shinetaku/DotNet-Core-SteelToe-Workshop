@@ -23,7 +23,7 @@ This workshop assumes the student has a basic understanding of Pivotal Cloud Fou
   - Lab 6 - Service Discovery through Eureka
   - Lab 7 - Refactor DotNet Core for Service Discovery
 
-#### Session 3: Spring Cloud Data Flow (SCDF) with GemFire
+#### Session 3: Spring Cloud Services and Spring Cloud Data Flow - [Start Session](https://github.com/timmers-io/SpringCloudWorkshop)
   - Spring Cloud Data Flow and GemFire Overview
   - Binding to GemFire
   - Spring Cloud Data Flow and GemFire
